@@ -1,0 +1,52 @@
+<div id="chat-applicaton">
+  <h2>Chat Application - Angular client</h2>
+
+  <div id="chat-window">
+    <div style="text-align: center">
+      <p>{{ this.Welcomemessage }}</p>
+    </div>
+
+    <div id="output" *ngFor="let data of output">
+      <p>
+        <strong>{{ data.handle }} : </strong>{{ data.message }}
+      </p>
+    </div>
+    <div style="text-align: center">
+      <p>{{ userjoinedmsg }}</p>
+      <p>{{ participantmessage }}</p>
+      <p style="color: maroon">{{ userLeftMessage }} {{ lastTypingTime }}</p>
+    </div>
+
+    <div id="feedback">
+      <p>{{ feedback }}</p>
+    </div>
+  </div>
+  <input
+    id="handle"
+    #handle
+    type="text"
+    [disabled]="added"
+    [(ngModel)]="userName"
+    placeholder="Handle"
+    required
+  />
+
+
+  <input
+    id="message"
+    type="text"
+    [(ngModel)]="message"
+    placeholder="Type here..."
+    autocomplete="off"
+    (keypress)="messageTyping()"
+  />
+  <button
+    class="button1"
+    type="button"
+    id="send"
+    style="cursor: pointer"
+    (click)="sendMessage()"
+  >
+    Send
+  </button>
+</div>

@@ -1,0 +1,30 @@
+.focusedData {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.focusedData {
+  // display:inline-block;
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.row:active,
+.row:focus {
+  background: white;
+  color: black;
+}
+
+
+li.active{
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  background: lemonchiffon;
+}

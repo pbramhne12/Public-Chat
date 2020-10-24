@@ -1,0 +1,53 @@
+<div class="overlayWrapper fixed style-4">
+  <div class="reviewDetailView">
+
+    <div *ngIf="this.userList.length > 0">
+      <div class="chat-container">
+        <header class="chat-header">
+          <h1><i class="fas fa-smile"></i> Priavte Chat</h1>
+          <a class="avatarImage"></a>{{currentUser}}
+          <a   href="#" (click)="destroyCamapignDetailView()" class="btn">Leave Priavte Chat</a>
+        </header>
+        <main class="chat-main">
+          <div class="chat-sidebar">
+            <h3><i class="fas fa-users"></i> Users</h3>
+            <ul id="users">
+              <li  [ngClass]="{'active': selectedItem == user}" (click)="SelectPrivateChat($event, user)"  *ngFor="let user of userList">
+                <p *ngIf="currentUser != user.username">{{ user.username }}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-messages">
+            <div class="message" *ngFor="let message of PrivatemessageList">
+              <p class="meta">
+                {{ message.username }}<span>&nbsp; {{ message.time }}</span>
+              </p>
+              <p class="text">{{ message.text }}</p>
+            </div>
+          </div>
+
+          <!-- <div id="feedback">
+            <p>{{ feedback }}</p>
+          </div> -->
+        </main>
+
+        <div class="chat-form-container">
+          <div style="display: flex" id="chat-form">
+            <input
+              id="msg"
+              type="text"
+              placeholder="Enter Message"
+              required
+              autocomplete="off"
+              [(ngModel)]="message"
+              #msg
+            />
+            <button class="btn" (click)="submitPC(msg.value)">
+              <i class="fas fa-paper-plane"></i> Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

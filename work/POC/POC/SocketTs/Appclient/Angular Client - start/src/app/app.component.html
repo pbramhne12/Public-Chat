@@ -1,0 +1,111 @@
+<div *ngIf="this.userList.length == 0">
+  <div class="join-container">
+    <header class="join-header">
+      <h2><i class="fas fa-smile"></i> Socket app</h2>
+    </header>
+    <main class="join-main">
+      <form action="chat.html">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            #name
+            placeholder="Enter username..."
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label for="room">Room</label>
+          <select name="room" id="room">
+            <option value="JavaScript">Room1</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" (click)="joinChat(name.value)">
+          Join Chat
+        </button>
+      </form>
+    </main>
+  </div>
+</div>
+
+<div *ngIf="this.userList.length > 0">
+  <div class="chat-container">
+    <header class="chat-header">
+      <!-- <h1><i class="fas fa-smile"></i>Public Chat</h1> -->
+      <a class="avatarImage"></a><h3>{{ currentUser }}</h3>
+
+      <a
+        *ngIf="this.userList.length > 1"
+        (click)="OpenPrivateChat()"
+        href="#Private_Window"
+        class="btn"
+        >Private Chat</a
+      >
+
+      <a href="index.html" (click)="leaveRoom()" class="btn">Leave Room</a>
+    </header>
+    <main class="chat-main">
+      <div class="chat-sidebar">
+        <h3><i class="fas fa-comments"></i> Room Name:</h3>
+        <h2 id="room-name">{{ roomName }}</h2>
+        <h3><i class="fas fa-users"></i> Users</h3>
+        <ul id="users" *ngFor="let user of userList">
+          <li>{{ user.username }}</li>
+        </ul>
+      </div>
+      <div class="chat-messages">
+        <div class="message" *ngFor="let message of messageList">
+          <p class="meta">
+            {{ message.username }}<span>&nbsp; {{ message.time }}</span>
+          </p>
+          <p class="text">{{ message.text }}</p>
+        </div>
+        <div id="feedback">
+          <p>{{ feedback }}</p>
+        </div>
+      </div>
+    </main>
+
+    <div class="chat-form-container">
+      <div style="display: flex" id="chat-form">
+        <input
+          id="msg"
+          type="text"
+          placeholder="Enter Message"
+          required
+          autocomplete="off"
+          #msg
+          [(ngModel)]="message"
+          (keypress)="messageTyping()"
+        />
+        <button class="btn" (click)="submit(msg.value)">
+          <i class="fas fa-paper-plane"></i> Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <h1>Popup/Modal Windows without JavaScript</h1>
+<div class="box">
+  <a class="button" href="#Private_Window">Let me Pop up</a>
+</div> -->
+
+<div id="Private_Window" class="overlay">
+  <div class="popup">
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+      <app-private-chat
+        *ngIf="newCampaignClicked != null"
+        (destroy)="closePrivateChat()"
+        [userList]="userList"
+        [PrivatemessageList]="PrivatemessageList"
+      >
+      </app-private-chat>
+    </div>
+  </div>
+</div>
+
+<!-- <router-outlet></router-outlet> -->
